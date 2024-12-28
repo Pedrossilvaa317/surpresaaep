@@ -17,3 +17,21 @@ function updateCounter() {
 }
 
 setInterval(updateCounter, 1000);
+
+const slideContainer = document.querySelector('.slide-container');
+const images = [
+    'foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg',
+    'foto6.jpg', 'foto7.jpg', 'foto8.jpg', 'foto9.jpg'
+];
+
+slideContainer.style.width = `${images.length * 4}%`;
+slideContainer.style.display = 'flex';
+slideContainer.style.transition = 'transform 5.5s ease';
+
+slideContainer.innerHTML = images.map(image => `<img src="${image}" alt="Foto" style="flex: 1 0 auto;">`).join('');
+
+let currentIndex = 0;
+setInterval(() => {
+    currentIndex = (currentIndex + 1) % images.length;
+    slideContainer.style.transform = `translateX(-${currentIndex * (100 / images.length)}%)`;
+}, 3000);
